@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Interactive Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #game { margin: 20px; }
+        #message { font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Simple Interactive Game</h1>
+    <div id="game">
+        <button id="startGame">Start Game</button>
+        <div id="score">Score: 0</div>
+        <div id="message"></div>
+    </div>
+    <script>
+        let score = 0;
+        let winCondition = 5;
+
+        document.getElementById('startGame').addEventListener('click', startGame);
+
+        function startGame() {
+            score = 0;
+            updateScore();
+            playGame();
+        }
+
+        function playGame() {
+            const interval = setInterval(() => {
+                score++;
+                updateScore();
+                if (score >= winCondition) {
+                    clearInterval(interval);
+                    document.getElementById('message').textContent = 'You win! Points awarded: ' + score;
+                }
+            }, 1000);
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = 'Score: ' + score;
+        }
+    </script>
+</body>
+</html>
